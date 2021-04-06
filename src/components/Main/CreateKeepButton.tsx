@@ -1,8 +1,12 @@
 import { ReactComponent as KeepIcon } from "../../assets/icons/keep.svg";
 
-export const CreateKeepButton = () => {
+type Props = {
+  openModal: () => void;
+};
+
+export const CreateKeepButton = (props: Props) => {
   return (
-    <button className="main__create-keep" onClick={() => alert("Gi")}>
+    <button className="main__create-keep" onClick={props.openModal}>
       <div className="main__create-keep__icon">
         <KeepIcon />
       </div>

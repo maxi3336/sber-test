@@ -44,3 +44,16 @@ select:-webkit-autofill:focus {
     rgba(0, 174, 255, 0.03) 100%
   );
 }
+
+.base-animation {
+  animation: 0.4s base;
+}
+
+@keyframes base {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
