@@ -32,8 +32,10 @@ export const CreateKeepModal = (props: { closeModal: () => void }) => {
       isChecked: false,
     };
 
-    setTodos((prev) => [...prev, _todo]);
-    setTodoValue("");
+    if (_todo.content) {
+      setTodos((prev) => [...prev, _todo]);
+      setTodoValue("");
+    }
   };
 
   const checkTodoHandler = (id: string) => {
@@ -60,6 +62,7 @@ export const CreateKeepModal = (props: { closeModal: () => void }) => {
 
   const submitHandler = () => {
     const keep = {
+      id: uuidv4(),
       title: keepTitleValue,
       todos: todos,
     };

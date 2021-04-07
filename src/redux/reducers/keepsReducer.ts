@@ -7,6 +7,7 @@ type Todo = {
 };
 
 type Keep = {
+  id: string;
   title: string;
   todos: Todo[];
 };
