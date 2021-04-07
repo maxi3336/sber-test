@@ -7,6 +7,7 @@ import { useState } from "react";
 import { DeleteConfirmModal } from "../Modals/DeleteConfirmModal";
 import { useDispatch } from "react-redux";
 import { deleteKeep, setEdited } from "../../redux/reducers/keepsReducer";
+import { useHistory } from "react-router";
 
 type Keep = {
   id: string;
@@ -18,6 +19,7 @@ export const KeepItem = (props: { keep: Keep }) => {
   const [deleteId, setDeleteId] = useState("");
 
   const dispatch = useDispatch();
+  const history = useHistory();
 
   const deleteModalHandler = () => {
     setDeleteId(props.keep.id);
@@ -34,6 +36,7 @@ export const KeepItem = (props: { keep: Keep }) => {
 
   const editKeepHandler = () => {
     dispatch(setEdited(props.keep));
+    history.push("/edit");
   };
 
   return (
