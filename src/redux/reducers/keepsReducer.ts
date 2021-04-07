@@ -12,12 +12,20 @@ type Keep = {
   todos: Todo[];
 };
 
+type State = {
+  keeps: Keep[];
+  isEdit: boolean;
+  editedKeep: Keep | undefined;
+};
+
 type KeepId = {
   id: string;
 };
 
-const initialState: { keeps: Keep[] } = {
+const initialState: State = {
   keeps: [],
+  isEdit: false,
+  editedKeep: undefined,
 };
 
 const keeps = createSlice({
@@ -32,12 +40,30 @@ const keeps = createSlice({
     },
     deleteKeep: (state, action: PayloadAction<KeepId>) => {
       state.keeps = state.keeps.filter((keep) => keep.id !== action.payload.id);
+      if (state.isEdit && action.payload.id === state.editedKeep?.id) {
+        state.isEdit = false;
+        state.editedKeep = undefined;
+      }
+    },
+    setEdited: (state, action: PayloadAction<Keep>) => {
+      state.isEdit = true;
+      state.editedKeep = action.payload;
+    },
+    removeEdited: (state) => {
+      state.isEdit = false;
+      state.editedKeep = undefined;
     },
   },
 });
 
 const { actions, reducer } = keeps;
 
-export const { setKeeps, addKeep, deleteKeep } = actions;
+export const {
+  setKeeps,
+  addKeep,
+  deleteKeep,
+  setEdited,
+  removeEdited,
+} = actions;
 
 export default reducer;

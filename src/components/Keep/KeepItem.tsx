@@ -6,7 +6,7 @@ import { ReactComponent as EditIcon } from "../../assets/icons/edit.svg";
 import { useState } from "react";
 import { DeleteConfirmModal } from "../Modals/DeleteConfirmModal";
 import { useDispatch } from "react-redux";
-import { deleteKeep } from "../../redux/reducers/keepsReducer";
+import { deleteKeep, setEdited } from "../../redux/reducers/keepsReducer";
 
 type Keep = {
   id: string;
@@ -32,12 +32,16 @@ export const KeepItem = (props: { keep: Keep }) => {
     closeModal();
   };
 
+  const editKeepHandler = () => {
+    dispatch(setEdited(props.keep));
+  };
+
   return (
     <div className="keep">
       <div className="keep__header">
         <h3>{props.keep.title}</h3>
         <div className="keep__btns">
-          <div className="keep__edit">
+          <div className="keep__edit" onClick={editKeepHandler}>
             <EditIcon />
           </div>
           <div className="keep__delete" onClick={deleteModalHandler}>
