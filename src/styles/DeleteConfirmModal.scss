@@ -1,0 +1,42 @@
+.confirm-modal {
+  &__buttons {
+    margin-top: 16px;
+
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+  }
+
+  &__confirm,
+  &__decline {
+    width: 45%;
+    padding: 10px;
+    border-radius: 8px;
+    font-size: 16px;
+
+    cursor: pointer;
+
+    &:hover {
+      padding: 8px;
+    }
+  }
+
+  &__confirm {
+    background-color: #ff4747;
+    color: #f5f5f4;
+
+    &:hover {
+      background-color: #ff4747c9;
+      border: 2px solid #831b1b;
+    }
+  }
+
+  &__decline {
+    background-color: #dadada;
+
+    &:hover {
+      background-color: #dadadac5;
+      border: 2px solid #9c9c9c;
+    }
+  }
+}

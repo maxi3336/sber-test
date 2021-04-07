@@ -3,6 +3,10 @@ import "../../styles/KeepItem.scss";
 import { ToDoItem } from "./ToDoItem";
 import { ReactComponent as DeleteIcon } from "../../assets/icons/delete.svg";
 import { ReactComponent as EditIcon } from "../../assets/icons/edit.svg";
+import { useState } from "react";
+import { DeleteConfirmModal } from "../Modals/DeleteConfirmModal";
+import { useDispatch } from "react-redux";
+import { deleteKeep } from "../../redux/reducers/keepsReducer";
 
 type Keep = {
   id: string;
@@ -11,7 +15,22 @@ type Keep = {
 };
 
 export const KeepItem = (props: { keep: Keep }) => {
-  console.log(props.keep);
+  const [deleteId, setDeleteId] = useState("");
+
+  const dispatch = useDispatch();
+
+  const deleteModalHandler = () => {
+    setDeleteId(props.keep.id);
+  };
+
+  const closeModal = () => {
+    setDeleteId("");
+  };
+
+  const deleteKeepHandler = (id: string) => {
+    dispatch(deleteKeep({ id }));
+    closeModal();
+  };
 
   return (
     <div className="keep">
@@ -21,7 +40,7 @@ export const KeepItem = (props: { keep: Keep }) => {
           <div className="keep__edit">
             <EditIcon />
           </div>
-          <div className="keep__delete">
+          <div className="keep__delete" onClick={deleteModalHandler}>
             <DeleteIcon />
           </div>
         </div>
@@ -36,6 +55,13 @@ export const KeepItem = (props: { keep: Keep }) => {
           />
         ))}
       </div>
+      {deleteId ? (
+        <DeleteConfirmModal
+          deleteKeepHandler={deleteKeepHandler}
+          id={props.keep.id}
+          close={closeModal}
+        />
+      ) : null}
     </div>
   );
 };

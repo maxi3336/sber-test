@@ -12,6 +12,10 @@ type Keep = {
   todos: Todo[];
 };
 
+type KeepId = {
+  id: string;
+};
+
 const initialState: { keeps: Keep[] } = {
   keeps: [],
 };
@@ -26,11 +30,14 @@ const keeps = createSlice({
     addKeep: (state, action: PayloadAction<Keep>) => {
       state.keeps.push(action.payload);
     },
+    deleteKeep: (state, action: PayloadAction<KeepId>) => {
+      state.keeps = state.keeps.filter((keep) => keep.id !== action.payload.id);
+    },
   },
 });
 
 const { actions, reducer } = keeps;
 
-export const { addKeep } = actions;
+export const { setKeeps, addKeep, deleteKeep } = actions;
 
 export default reducer;

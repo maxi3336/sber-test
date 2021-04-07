@@ -1,4 +1,5 @@
 import "../../styles/CreateKeepModal.scss";
+import "../../styles/Modal.scss";
 
 import { Portal } from "react-portal";
 import { ReactComponent as CloseIcon } from "../../assets/icons/close.svg";
@@ -75,11 +76,14 @@ export const CreateKeepModal = (props: { closeModal: () => void }) => {
 
   return (
     <Portal>
-      <div className="create-modal base-animation">
-        <div className="create-modal__body">
-          <div className="create-modal__header">
+      <div className="base-modal create-modal base-animation">
+        <div className="create-modal__body base-modal__body">
+          <div className="create-modal__header base-modal__header">
             <h2>Create Keep</h2>
-            <div className="create-modal__close" onClick={props.closeModal}>
+            <div
+              className="create-modal__close base-modal__close"
+              onClick={props.closeModal}
+            >
               <CloseIcon />
             </div>
           </div>
