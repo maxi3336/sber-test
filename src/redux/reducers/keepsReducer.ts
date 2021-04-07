@@ -1,8 +1,14 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
+type Todo = {
+  id: string;
+  content: string;
+  isChecked: boolean;
+};
+
 type Keep = {
-  name: string;
-  todo: [];
+  title: string;
+  todos: Todo[];
 };
 
 const initialState: { keeps: Keep[] } = {
@@ -16,8 +22,8 @@ const keeps = createSlice({
     setKeeps: (state, action: PayloadAction<Keep[]>) => {
       state.keeps = action.payload;
     },
-    addKeep: (state, action: PayloadAction<Keep[]>) => {
-      state.keeps.push(...action.payload);
+    addKeep: (state, action: PayloadAction<Keep>) => {
+      state.keeps.push(action.payload);
     },
   },
 });
