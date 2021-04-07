@@ -17,15 +17,11 @@ export const Edit = () => {
 
   return (
     <div className={`page edit ${!isEdit ? "edit--empty" : ""}`}>
-      <div className="edit__top">
-        {isEdit && editedKeep ? (
-          <h2 className="edit__title">{editedKeep.title}</h2>
-        ) : (
-          <NavLink to="/main" className="edit__empty">
-            Select keep to Edit
-          </NavLink>
-        )}
-      </div>
+      {!isEdit && !editedKeep ? (
+        <NavLink to="/main" className="edit__empty">
+          Select keep to Edit
+        </NavLink>
+      ) : null}
     </div>
   );
 };
