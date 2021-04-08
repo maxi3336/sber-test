@@ -1,0 +1,27 @@
+{
+  "files": {
+    "main.css": "/sber-test/static/css/main.d4f2a820.chunk.css",
+    "main.js": "/sber-test/static/js/main.cafe4aba.chunk.js",
+    "main.js.map": "/sber-test/static/js/main.cafe4aba.chunk.js.map",
+    "runtime-main.js": "/sber-test/static/js/runtime-main.174b6b09.js",
+    "runtime-main.js.map": "/sber-test/static/js/runtime-main.174b6b09.js.map",
+    "static/js/2.df37cc27.chunk.js": "/sber-test/static/js/2.df37cc27.chunk.js",
+    "static/js/2.df37cc27.chunk.js.map": "/sber-test/static/js/2.df37cc27.chunk.js.map",
+    "index.html": "/sber-test/index.html",
+    "static/css/main.d4f2a820.chunk.css.map": "/sber-test/static/css/main.d4f2a820.chunk.css.map",
+    "static/js/2.df37cc27.chunk.js.LICENSE.txt": "/sber-test/static/js/2.df37cc27.chunk.js.LICENSE.txt",
+    "static/media/check-box.0993eca8.svg": "/sber-test/static/media/check-box.0993eca8.svg",
+    "static/media/close.17a94979.svg": "/sber-test/static/media/close.17a94979.svg",
+    "static/media/delete.e4efcb06.svg": "/sber-test/static/media/delete.e4efcb06.svg",
+    "static/media/edit.3c70b537.svg": "/sber-test/static/media/edit.3c70b537.svg",
+    "static/media/home.3b70c47e.svg": "/sber-test/static/media/home.3b70c47e.svg",
+    "static/media/keep.0f361bc6.svg": "/sber-test/static/media/keep.0f361bc6.svg",
+    "static/media/unchecked-box.7d03d37b.svg": "/sber-test/static/media/unchecked-box.7d03d37b.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.174b6b09.js",
+    "static/js/2.df37cc27.chunk.js",
+    "static/css/main.d4f2a820.chunk.css",
+    "static/js/main.cafe4aba.chunk.js"
+  ]
+}
