@@ -4,38 +4,53 @@ import { Keep } from "../../utils/types";
 type State = {
   keeps: Keep[];
   isEdit: boolean;
-  editedKeep: Keep | undefined;
+  editedKeep: Keep | null;
 };
 
 const initialState: State = {
   keeps: [],
   isEdit: false,
-  editedKeep: undefined,
+  editedKeep: null,
+};
+
+const updateLocalStorage = (keeps: Keep[]) => {
+  localStorage.setItem("keeps", JSON.stringify(keeps));
 };
 
 const keeps = createSlice({
   name: "app",
   initialState,
   reducers: {
-    setKeeps: (state, action: PayloadAction<Keep[]>) => {
-      state.keeps = action.payload;
+    setKeeps: (state, action: PayloadAction<State>) => {
+      state.keeps = action.payload.keeps;
+      state.isEdit = action.payload.isEdit;
+      state.editedKeep = action.payload.editedKeep;
     },
     addKeep: (state, action: PayloadAction<Keep>) => {
-      state.keeps.push(action.payload);
+      const _keeps = [...state.keeps, action.payload];
+
+      state.keeps = _keeps;
+      updateLocalStorage(_keeps);
     },
     deleteKeep: (state, action: PayloadAction<{ id: string }>) => {
-      state.keeps = state.keeps.filter((keep) => keep.id !== action.payload.id);
+      const _keeps = state.keeps.filter(
+        (keep) => keep.id !== action.payload.id
+      );
+
       if (state.isEdit && action.payload.id === state.editedKeep?.id) {
         state.isEdit = false;
-        state.editedKeep = undefined;
+        state.editedKeep = null;
       }
+
+      state.keeps = _keeps;
+      updateLocalStorage(_keeps);
     },
     setEdited: (state, action: PayloadAction<Keep>) => {
       state.isEdit = true;
       state.editedKeep = action.payload;
     },
     editKeep: (state, action: PayloadAction<Keep>) => {
-      state.keeps = state.keeps.map((keep) => {
+      const _keeps = state.keeps.map((keep) => {
         if (keep.id === action.payload.id)
           return {
             id: keep.id,
@@ -44,10 +59,13 @@ const keeps = createSlice({
           };
         return keep;
       });
+
+      state.keeps = _keeps;
+      updateLocalStorage(_keeps);
     },
     removeEdited: (state) => {
       state.isEdit = false;
-      state.editedKeep = undefined;
+      state.editedKeep = null;
     },
   },
 });

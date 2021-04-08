@@ -63,6 +63,7 @@ export const KeepItem = (props: {
           <div className="keep__todos">
             {props.keep.todos.map((todo) => (
               <ToDoItem
+                key={todo.id}
                 onClick={props.onClick}
                 deleteHandler={props.deleteHandler}
                 isEdit={props.isEdit}
