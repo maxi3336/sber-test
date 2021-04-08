@@ -8,12 +8,7 @@ import React, { FormEvent, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { useDispatch } from "react-redux";
 import { addKeep } from "../../redux/reducers/keepsReducer";
-
-type Todo = {
-  id: string;
-  content: string;
-  isChecked: boolean;
-};
+import { Todo } from "../../utils/types";
 
 export const CreateKeepModal = (props: { closeModal: () => void }) => {
   const [keepTitleValue, setKeepTitleValue] = useState("");

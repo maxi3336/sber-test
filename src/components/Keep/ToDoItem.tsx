@@ -3,16 +3,13 @@ import "../../styles/ToDoItem.scss";
 import { ReactComponent as UncheckedBox } from "../../assets/icons/unchecked-box.svg";
 import { ReactComponent as CheckedBox } from "../../assets/icons/check-box.svg";
 import { ReactComponent as DeleteIcon } from "../../assets/icons/delete.svg";
+import { Todo } from "../../utils/types";
 
 type Props = {
   onClick: (id: string) => void;
   deleteHandler: (id: string) => void;
   canBeDeleted: boolean;
-  todo: {
-    id: string;
-    isChecked: boolean;
-    content: string;
-  };
+  todo: Todo;
 };
 
 export const ToDoItem = (props: Props) => {

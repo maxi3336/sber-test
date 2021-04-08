@@ -9,18 +9,7 @@ import { useDispatch } from "react-redux";
 import { deleteKeep, setEdited } from "../../redux/reducers/keepsReducer";
 import { useHistory } from "react-router";
 import Scrollbars from "react-custom-scrollbars";
-
-type Todo = {
-  id: string;
-  content: string;
-  isChecked: boolean;
-};
-
-type Keep = {
-  id: string;
-  title: string;
-  todos: Todo[];
-};
+import { Keep } from "../../utils/types";
 
 export const KeepItem = (props: {
   keep: Keep;

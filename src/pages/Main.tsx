@@ -6,15 +6,7 @@ import { CreateKeepModal } from "../components/Modals/CreateKeepModal";
 import { useSelector } from "react-redux";
 import { KeepItem } from "../components/Keep/KeepItem";
 import Scrollbars from "react-custom-scrollbars";
-
-type Keep = {
-  id: string;
-  title: string;
-  todos: [];
-};
-interface Keeps {
-  keeps: { keeps: Keep[] };
-}
+import { Keeps } from "../utils/types";
 
 export const Main = () => {
   const [isModal, setIsModal] = useState(false);

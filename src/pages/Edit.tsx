@@ -11,21 +11,7 @@ import {
   editKeep,
 } from "../redux/reducers/keepsReducer";
 import { DeleteConfirmModal } from "../components/Modals/DeleteConfirmModal";
-
-type Todo = {
-  id: string;
-  content: string;
-  isChecked: boolean;
-};
-
-type Keep = {
-  id: string;
-  title: string;
-  todos: Todo[];
-};
-interface Keeps {
-  keeps: { editedKeep: Keep; isEdit: boolean };
-}
+import { Keep, Keeps } from "../utils/types";
 
 export const Edit = () => {
   const [keep, setKeep] = useState<Keep>({

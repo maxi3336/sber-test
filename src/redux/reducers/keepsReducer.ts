@@ -1,25 +1,10 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-
-type Todo = {
-  id: string;
-  content: string;
-  isChecked: boolean;
-};
-
-type Keep = {
-  id: string;
-  title: string;
-  todos: Todo[];
-};
+import { Keep } from "../../utils/types";
 
 type State = {
   keeps: Keep[];
   isEdit: boolean;
   editedKeep: Keep | undefined;
-};
-
-type KeepId = {
-  id: string;
 };
 
 const initialState: State = {
@@ -38,7 +23,7 @@ const keeps = createSlice({
     addKeep: (state, action: PayloadAction<Keep>) => {
       state.keeps.push(action.payload);
     },
-    deleteKeep: (state, action: PayloadAction<KeepId>) => {
+    deleteKeep: (state, action: PayloadAction<{ id: string }>) => {
       state.keeps = state.keeps.filter((keep) => keep.id !== action.payload.id);
       if (state.isEdit && action.payload.id === state.editedKeep?.id) {
         state.isEdit = false;
