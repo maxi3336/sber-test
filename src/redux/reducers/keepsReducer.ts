@@ -49,6 +49,17 @@ const keeps = createSlice({
       state.isEdit = true;
       state.editedKeep = action.payload;
     },
+    editKeep: (state, action: PayloadAction<Keep>) => {
+      state.keeps = state.keeps.map((keep) => {
+        if (keep.id === action.payload.id)
+          return {
+            id: keep.id,
+            title: action.payload.title,
+            todos: action.payload.todos,
+          };
+        return keep;
+      });
+    },
     removeEdited: (state) => {
       state.isEdit = false;
       state.editedKeep = undefined;
@@ -63,6 +74,7 @@ export const {
   addKeep,
   deleteKeep,
   setEdited,
+  editKeep,
   removeEdited,
 } = actions;
 
