@@ -8,7 +8,7 @@ import { Todo } from "../../utils/types";
 type Props = {
   onClick: (id: string) => void;
   deleteHandler: (id: string) => void;
-  canBeDeleted: boolean;
+  isEdit: boolean;
   todo: Todo;
 };
 
@@ -28,7 +28,7 @@ export const ToDoItem = (props: Props) => {
       >
         {props.todo.content}
       </div>
-      {props.canBeDeleted ? (
+      {props.isEdit ? (
         <div
           className="todo__delete"
           onClick={() => props.deleteHandler(props.todo.id)}

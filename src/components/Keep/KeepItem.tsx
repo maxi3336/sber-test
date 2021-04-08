@@ -64,7 +64,7 @@ export const KeepItem = (props: {
               <ToDoItem
                 onClick={props.onClick}
                 deleteHandler={props.deleteHandler}
-                canBeDeleted={props.isEdit}
+                isEdit={props.isEdit}
                 todo={todo}
               />
             ))}

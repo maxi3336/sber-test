@@ -119,12 +119,8 @@ export const CreateKeepModal = (props: { closeModal: () => void }) => {
                     key={todo.id}
                     onClick={checkTodoHandler}
                     deleteHandler={deleteTodoHandler}
-                    canBeDeleted
-                    todo={{
-                      id: todo.id,
-                      isChecked: todo.isChecked,
-                      content: todo.content,
-                    }}
+                    isEdit={true}
+                    todo={todo}
                   />
                 );
               })}
