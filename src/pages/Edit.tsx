@@ -1,10 +1,16 @@
 import "../styles/Edit.scss";
 
-import { useSelector } from "react-redux";
-import { NavLink } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { NavLink, useHistory } from "react-router-dom";
 import { KeepItem } from "../components/Keep/KeepItem";
 import { useEffect, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
+import {
+  removeEdited,
+  deleteKeep,
+  editKeep,
+} from "../redux/reducers/keepsReducer";
+import { DeleteConfirmModal } from "../components/Modals/DeleteConfirmModal";
 
 type Todo = {
   id: string;
@@ -28,8 +34,14 @@ export const Edit = () => {
     todos: [],
   });
   const [todoValue, setTodoValue] = useState("");
+  const [isDelete, setIsDelete] = useState(false);
 
   const { isEdit, editedKeep } = useSelector((state: Keeps) => state.keeps);
+
+  const dispatch = useDispatch();
+  const history = useHistory();
+
+  const goToMain = () => history.push("/main");
 
   useEffect(() => {
     setKeep(editedKeep);
@@ -71,7 +83,32 @@ export const Edit = () => {
     }));
   };
 
-  const deleteTodoHandler = (id: string) => {};
+  const deleteTodoHandler = (id: string) => {
+    setKeep((prev) => ({
+      ...prev,
+      todos: prev.todos.filter((todo) => todo.id !== id),
+    }));
+  };
+
+  const saveHandler = () => {
+    dispatch(editKeep(keep));
+    dispatch(removeEdited());
+    goToMain();
+  };
+
+  const declineHandler = () => {
+    setKeep(editedKeep);
+  };
+
+  const deleteHandler = () => {
+    dispatch(deleteKeep({ id: keep.id }));
+    goToMain();
+  };
+
+  const closeHandler = () => {
+    dispatch(removeEdited());
+    goToMain();
+  };
 
   if (keep && isEdit) {
     return (
@@ -85,26 +122,56 @@ export const Edit = () => {
           />
 
           <div className="edit__form">
-            <div className="base-input">
-              <input
-                placeholder="Title"
-                value={keep.title}
-                onChange={changeTitleHandler}
-              />
-            </div>
-
-            <div className="base-todo-input">
+            <div className="edit__inputs">
               <div className="base-input">
                 <input
-                  placeholder="Add todo"
-                  value={todoValue}
-                  onChange={todoValueHandler}
+                  placeholder="Title"
+                  value={keep.title}
+                  onChange={changeTitleHandler}
                 />
               </div>
-              <button onClick={addTodoHandler}>Add</button>
+
+              <div className="base-todo-input">
+                <div className="base-input">
+                  <input
+                    placeholder="Add todo"
+                    value={todoValue}
+                    onChange={todoValueHandler}
+                  />
+                </div>
+                <button onClick={addTodoHandler}>Add</button>
+              </div>
+            </div>
+
+            <div className="edit__buttons">
+              <button className="edit__btn edit__save" onClick={saveHandler}>
+                Save changes
+              </button>
+              <button
+                className="edit__btn edit__decline"
+                onClick={declineHandler}
+              >
+                Decline changes
+              </button>
+              <button
+                className="edit__btn edit__delete"
+                onClick={() => setIsDelete(true)}
+              >
+                Delete keep
+              </button>
+              <button className="edit__btn edit__close" onClick={closeHandler}>
+                Decline and Close
+              </button>
             </div>
           </div>
         </div>
+        {isDelete ? (
+          <DeleteConfirmModal
+            id={keep.id}
+            close={() => setIsDelete(false)}
+            deleteKeepHandler={deleteHandler}
+          />
+        ) : null}
       </div>
     );
   }

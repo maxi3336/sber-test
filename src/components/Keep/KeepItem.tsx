@@ -41,8 +41,8 @@ export const KeepItem = (props: {
     setDeleteId("");
   };
 
-  const deleteKeepHandler = (id: string) => {
-    dispatch(deleteKeep({ id }));
+  const deleteKeepHandler = () => {
+    dispatch(deleteKeep({ id: props.keep.id }));
     closeModal();
   };
 

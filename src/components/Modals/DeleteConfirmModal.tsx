@@ -6,7 +6,7 @@ import { Portal } from "react-portal";
 export const DeleteConfirmModal = (props: {
   id: string;
   close: () => void;
-  deleteKeepHandler: (id: string) => void;
+  deleteKeepHandler: () => void;
 }) => {
   return (
     <Portal>
@@ -24,7 +24,7 @@ export const DeleteConfirmModal = (props: {
             </button>
             <button
               className="confirm-modal__confirm"
-              onClick={() => props.deleteKeepHandler(props.id)}
+              onClick={props.deleteKeepHandler}
             >
               Yes
             </button>
