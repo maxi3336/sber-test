@@ -15,6 +15,7 @@ export const KeepItem = (props: {
   keep: Keep;
   isEdit: boolean;
   deleteHandler: (id: string) => void;
+  changeTodo: (id: string, content: string) => void;
   onClick: (id: string) => void;
 }) => {
   const [deleteId, setDeleteId] = useState("");
@@ -66,6 +67,7 @@ export const KeepItem = (props: {
                 deleteHandler={props.deleteHandler}
                 isEdit={props.isEdit}
                 todo={todo}
+                changeTodo={props.changeTodo}
               />
             ))}
           </div>

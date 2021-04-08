@@ -8,6 +8,7 @@ import { Todo } from "../../utils/types";
 type Props = {
   onClick: (id: string) => void;
   deleteHandler: (id: string) => void;
+  changeTodo: (id: string, content: string) => void;
   isEdit: boolean;
   todo: Todo;
 };
@@ -21,13 +22,24 @@ export const ToDoItem = (props: Props) => {
       >
         {!props.todo.isChecked ? <UncheckedBox /> : <CheckedBox />}
       </div>
-      <div
-        className={
-          props.todo.isChecked ? "todo__content--checked" : "todo__content"
-        }
-      >
-        {props.todo.content}
-      </div>
+      {props.isEdit ? (
+        <input
+          className={`todo__content--input ${
+            props.todo.isChecked ? "todo__content--checked" : "todo__content"
+          }`}
+          value={props.todo.content}
+          onChange={(e) => props.changeTodo(props.todo.id, e.target.value)}
+        />
+      ) : (
+        <div
+          className={
+            props.todo.isChecked ? "todo__content--checked" : "todo__content"
+          }
+        >
+          {props.todo.content}
+        </div>
+      )}
+
       {props.isEdit ? (
         <div
           className="todo__delete"

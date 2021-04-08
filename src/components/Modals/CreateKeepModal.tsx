@@ -48,6 +48,20 @@ export const CreateKeepModal = (props: { closeModal: () => void }) => {
     );
   };
 
+  const changeTodoHandler = (id: string, content: string) => {
+    setTodos((prev) =>
+      prev.map((todo) => {
+        if (todo.id === id)
+          return {
+            isChecked: todo.isChecked,
+            content: content,
+            id: todo.id,
+          };
+        return todo;
+      })
+    );
+  };
+
   const deleteTodoHandler = (id: string) => {
     setTodos((prev) => prev.filter((todo) => todo.id !== id));
   };
@@ -119,6 +133,7 @@ export const CreateKeepModal = (props: { closeModal: () => void }) => {
                     key={todo.id}
                     onClick={checkTodoHandler}
                     deleteHandler={deleteTodoHandler}
+                    changeTodo={changeTodoHandler}
                     isEdit={true}
                     todo={todo}
                   />

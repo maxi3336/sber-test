@@ -54,6 +54,21 @@ export const Edit = () => {
     }
   };
 
+  const changeTodoHandler = (id: string, content: string) => {
+    setKeep((prev) => ({
+      ...prev,
+      todos: prev.todos.map((todo) => {
+        if (todo.id === id)
+          return {
+            id: todo.id,
+            content: content,
+            isChecked: todo.isChecked,
+          };
+        return todo;
+      }),
+    }));
+  };
+
   const markTodoHandler = (id: string) => {
     setKeep((prev) => ({
       ...prev,
@@ -101,6 +116,7 @@ export const Edit = () => {
       <div className="page edit">
         <div className="edit__content">
           <KeepItem
+            changeTodo={changeTodoHandler}
             keep={keep}
             isEdit={isEdit}
             onClick={markTodoHandler}

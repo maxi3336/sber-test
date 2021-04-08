@@ -28,6 +28,7 @@ export const Main = () => {
                     isEdit={false}
                     deleteHandler={() => {}}
                     onClick={() => {}}
+                    changeTodo={() => {}}
                   />
                 ))}
               </div>

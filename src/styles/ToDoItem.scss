@@ -41,6 +41,10 @@
 
   &__content--checked {
     text-decoration: line-through;
-    color: #6F6F72;
+    color: #6f6f72;
+  }
+
+  &__content--input {
+    background: transparent;
   }
 }
