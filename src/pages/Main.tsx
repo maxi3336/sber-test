@@ -5,6 +5,7 @@ import { useState } from "react";
 import { CreateKeepModal } from "../components/Modals/CreateKeepModal";
 import { useSelector } from "react-redux";
 import { KeepItem } from "../components/Keep/KeepItem";
+import Scrollbars from "react-custom-scrollbars";
 
 type Keep = {
   id: string;
@@ -24,7 +25,25 @@ export const Main = () => {
     <div className="page main">
       <CreateKeepButton openModal={() => setIsModal(true)} />
       <div className="main__content">
-        {keeps.length ? keeps.map((keep) => <KeepItem keep={keep} />) : null}
+        <div className="main__keeps-container">
+          {keeps.length ? (
+            <Scrollbars hideTracksWhenNotNeeded>
+              <div className="main__keeps">
+                {keeps.map((keep) => (
+                  <KeepItem
+                    key={keep.id}
+                    keep={keep}
+                    isEdit={false}
+                    deleteHandler={() => {}}
+                    onClick={() => {}}
+                  />
+                ))}
+              </div>
+            </Scrollbars>
+          ) : (
+            <h3 className="main__keeps-placeholder">There's nothing here!</h3>
+          )}
+        </div>
       </div>
 
       {isModal ? (

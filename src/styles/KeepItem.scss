@@ -1,7 +1,9 @@
 .keep {
   min-width: 15%;
   width: fit-content;
-  height: fit-content;
+  max-width: 30%;
+
+  min-height: 200px;
 
   padding: 20px;
 
@@ -23,12 +25,51 @@
       0px 16px 48px -4px rgba(18, 20, 23, 0.2);
   }
 
+  &--edit {
+    .keep__header {
+      h3 {
+        width: 100%;
+      }
+    }
+
+    &:hover {
+      cursor: unset;
+      border: 1px solid #eae8e9;
+      background-color: #f5f5f4;
+      box-shadow: 0px 6px 12px -6px rgba(18, 20, 23, 0.12),
+        0px 8px 24px -4px rgba(18, 20, 23, 0.08);
+    }
+  }
+
   &__header {
     width: 100%;
     display: flex;
     justify-content: space-between;
 
     margin-bottom: 16px;
+
+    h3 {
+      width: 80%;
+      max-height: 100px;
+      overflow: hidden;
+    }
+  }
+
+  &__todos-container {
+    width: 100%;
+    height: 100%;
+  }
+
+  &__todos {
+    height: 100%;
+    width: 100%;
+    padding-right: 24px;
+  }
+
+  .todo {
+    &:not(:last-child) {
+      margin-bottom: 8px;
+    }
   }
 
   &__btns {
@@ -55,7 +96,7 @@
 
   &__edit {
     margin-right: 4px;
-    
+
     &:hover {
       padding: 3px;
       border: 1px solid #3454d1;

@@ -1,6 +1,7 @@
 .edit {
   width: 100%;
   height: 100%;
+  flex-direction: row;
 
   &--empty {
     display: flex;
@@ -16,5 +17,28 @@
     &:hover {
       opacity: 0.7;
     }
+  }
+
+  &__content {
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .keep {
+      min-width: 30%;
+      height: 500px;
+
+      .todo {
+        margin-bottom: 12px;
+      }
+    }
+  }
+
+  &__form {
+    margin-left: 24px;
+    width: 20%;
   }
 }

@@ -8,14 +8,26 @@ import { DeleteConfirmModal } from "../Modals/DeleteConfirmModal";
 import { useDispatch } from "react-redux";
 import { deleteKeep, setEdited } from "../../redux/reducers/keepsReducer";
 import { useHistory } from "react-router";
+import Scrollbars from "react-custom-scrollbars";
+
+type Todo = {
+  id: string;
+  content: string;
+  isChecked: boolean;
+};
 
 type Keep = {
   id: string;
   title: string;
-  todos: [];
+  todos: Todo[];
 };
 
-export const KeepItem = (props: { keep: Keep }) => {
+export const KeepItem = (props: {
+  keep: Keep;
+  isEdit: boolean;
+  deleteHandler: (id: string) => void;
+  onClick: (id: string) => void;
+}) => {
   const [deleteId, setDeleteId] = useState("");
 
   const dispatch = useDispatch();
@@ -40,27 +52,35 @@ export const KeepItem = (props: { keep: Keep }) => {
   };
 
   return (
-    <div className="keep">
+    <div className={`keep ${props.isEdit ? "keep--edit" : ""}`}>
       <div className="keep__header">
         <h3>{props.keep.title}</h3>
         <div className="keep__btns">
-          <div className="keep__edit" onClick={editKeepHandler}>
-            <EditIcon />
-          </div>
-          <div className="keep__delete" onClick={deleteModalHandler}>
-            <DeleteIcon />
-          </div>
+          {!props.isEdit ? (
+            <div className="keep__edit" onClick={editKeepHandler}>
+              <EditIcon />
+            </div>
+          ) : null}
+          {!props.isEdit ? (
+            <div className="keep__delete" onClick={deleteModalHandler}>
+              <DeleteIcon />
+            </div>
+          ) : null}
         </div>
       </div>
-      <div className="keep__todos">
-        {props.keep.todos.map((todo) => (
-          <ToDoItem
-            onClick={() => {}}
-            deleteHandler={() => {}}
-            canBeDeleted={false}
-            todo={todo}
-          />
-        ))}
+      <div className="keep__todos-container">
+        <Scrollbars>
+          <div className="keep__todos">
+            {props.keep.todos.map((todo) => (
+              <ToDoItem
+                onClick={props.onClick}
+                deleteHandler={props.deleteHandler}
+                canBeDeleted={props.isEdit}
+                todo={todo}
+              />
+            ))}
+          </div>
+        </Scrollbars>
       </div>
       {deleteId ? (
         <DeleteConfirmModal

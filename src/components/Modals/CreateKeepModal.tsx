@@ -4,7 +4,7 @@ import "../../styles/Modal.scss";
 import { Portal } from "react-portal";
 import { ReactComponent as CloseIcon } from "../../assets/icons/close.svg";
 import { ToDoItem } from "../Keep/ToDoItem";
-import { useState } from "react";
+import React, { FormEvent, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { useDispatch } from "react-redux";
 import { addKeep } from "../../redux/reducers/keepsReducer";
@@ -61,7 +61,9 @@ export const CreateKeepModal = (props: { closeModal: () => void }) => {
     setKeepTitleValue(e.target.value);
   };
 
-  const submitHandler = () => {
+  const submitHandler = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
     const keep = {
       id: uuidv4(),
       title: keepTitleValue,
@@ -77,7 +79,10 @@ export const CreateKeepModal = (props: { closeModal: () => void }) => {
   return (
     <Portal>
       <div className="base-modal create-modal base-animation">
-        <div className="create-modal__body base-modal__body">
+        <form
+          onSubmit={submitHandler}
+          className="create-modal__body base-modal__body"
+        >
           <div className="create-modal__header base-modal__header">
             <h2>Create Keep</h2>
             <div
@@ -89,18 +94,24 @@ export const CreateKeepModal = (props: { closeModal: () => void }) => {
           </div>
           <div className="create-modal__form">
             <div className="column">
-              <div className="create-modal__input create-modal__input--title">
-                <input placeholder="Keep title" onChange={keepTitleHandler} />
+              <div className="base-input">
+                <input
+                  autoFocus
+                  placeholder="Keep title"
+                  onChange={keepTitleHandler}
+                />
               </div>
-              <div className="create-modal__add-todo">
-                <div className="create-modal__input">
+              <div className="base-todo-input">
+                <div className="base-input">
                   <input
                     placeholder="Add todo"
                     value={todoValue}
                     onChange={todoValueHandler}
                   />
                 </div>
-                <button onClick={addTodoHandler}>Add</button>
+                <button type="button" onClick={addTodoHandler}>
+                  Add
+                </button>
               </div>
             </div>
             <div className="column todo-list">
@@ -124,10 +135,10 @@ export const CreateKeepModal = (props: { closeModal: () => void }) => {
               })}
             </div>
           </div>
-          <button className="create-modal__submit" onClick={submitHandler}>
+          <button type="submit" className="create-modal__submit">
             Create
           </button>
-        </div>
+        </form>
       </div>
     </Portal>
   );
